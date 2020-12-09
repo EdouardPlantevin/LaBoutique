@@ -57,6 +57,9 @@
                     <a href="{{ path('account') }}">Compte <small>{{ app.user.firstname }}</small></a> | <a href="{{ path('app_logout') }}">Déconnection</a>
                 {% endif %}
             </div>
+            <a href="{{ path('cart') }}">
+                <img src="{{ asset('assets/img/shopping-cart.png') }}" class="cart-icon" alt="Accés au panier">
+            </a>
         </div>
     </nav>
 </header>
