@@ -71,6 +71,8 @@ class OrderController extends AbstractController
 
             //Enregistrer ma commande Order()
             $order = new Order();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCreateAt($date);
             $order->setCarrierName($carriers->getName());
@@ -80,9 +82,9 @@ class OrderController extends AbstractController
 
             $this->entityManager->persist($order);
 
-            $ordersDetails = new OrdersDetails();
             foreach ($cart->getFull() as $product)
             {
+                $ordersDetails = new OrdersDetails();
                 $ordersDetails->setMyOrder($order);
                 $ordersDetails->setProduct($product['product']->getName());
                 $ordersDetails->setQuantity($product['quantity']);
@@ -97,6 +99,7 @@ class OrderController extends AbstractController
                 'cart' => $cart->getFull(),
                 'carrier' => $carriers,
                 'delivery' => $delivery_content,
+                'reference' => $order->getReference()
             ]);
         }
         return $this->redirectToRoute('cart');
