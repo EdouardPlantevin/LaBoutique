@@ -2,39 +2,31 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Product;
+use App\Entity\Header;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class ProductCrudController extends AbstractCrudController
+class HeaderCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Product::class;
+        return Header::class;
     }
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name'),
-            SlugField::new('slug')->setTargetFieldName('name'),
-            TextField::new('subtitle'),
+            TextField::new('title', 'Titre du header'),
+            TextareaField::new('content', 'Contenu de notre header'),
+            TextField::new('btnTitle', 'Titre de notre bouton'),
+            TextField::new('btnUrl', 'url de destination de notre bouton'),
             ImageField::new('illustration')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads/')
                 ->setUploadedFileNamePattern('[randomhash].[extention]')
                 ->setRequired(false),
-            TextareaField::new('description'),
-            BooleanField::new('isBest', 'Produit Phare'),
-            MoneyField::new('price')->setCurrency('EUR'),
-            AssociationField::new('category')
         ];
     }
-
 }
