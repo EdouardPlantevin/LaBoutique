@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
-use App\Classes\Mail;
+use App\Classe\Mail;
 use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
